@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('revisions_history', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->enum('type', ['admin', 'supervisor', 'common']);
-            $table->rememberToken();
+            $table->foreignId('document_id')->constrained('documents');
+            $table->string('previus_content');
+            $table->string('new_content');
+            $table->foreignId('edited_by')->constrained('users');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('revisions_history');
     }
 };
