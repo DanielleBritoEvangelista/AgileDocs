@@ -10,7 +10,7 @@ Configurar o ambiente de desenvolvimento corretamente é crucial para garantir q
     
     ```bash
     bashCopy code
-    git config --global user.name "Seu Nome"
+    git config --global user.name "Seu Nome "
     git config --global user.email "seu@email.com"
     
     ```
