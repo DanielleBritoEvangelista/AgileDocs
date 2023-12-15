@@ -15,7 +15,7 @@ Desenvolver uma plataforma web e mobile para criação, edição e gerenciamento
 
 ### 1. Sprint 1: Planejamento Inicial
 
-- ✅ 📅 Reunião de Planejamento do Projeto
+- ✅ 📅 Planejamento do Projeto
 - ✅ 📋 Levantamento de Requisitos
 - ✅ 🏗️ Definição da Arquitetura do Sistema
 - ✅ ⚙️ Configuração do Ambiente de Desenvolvimento
