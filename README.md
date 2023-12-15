@@ -21,10 +21,10 @@ O objetivo deste projeto é fornecer uma plataforma web e mobile para a criaçã
 
 A documentação detalhada do projeto está disponível na pasta [Docs](/Docs). Você encontrará informações sobre:
 
-- [Arquitetura do Sistema](/Docs/Arquitetura-Sistema.md)
-- [Planejamento Geral](/Docs/Planejamento-Geral.md)
-- [Levantamento de Requisitos](/Docs/Levantamento-Requisitos.md)
-- [Configuração do Ambiente de Desenvolvimento](/Docs/Configuracao-Ambiente.md)
+- [Arquitetura do Sistema](/Docs/systemArchitecture.md)
+- [Planejamento Geral](/Docs/generalPlanning.md)
+- [Levantamento de Requisitos](/Docs/requirementsGathering.md)
+- [Configuração do Ambiente de Desenvolvimento](/Docs/environmentConfiguration.md)
 
 <!-- Configuração do Ambiente -->
 ## Configuração do Ambiente
