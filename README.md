@@ -34,7 +34,7 @@ Para configurar o ambiente de desenvolvimento, siga as instruções detalhadas n
 <!-- Desenvolvimento -->
 ## Desenvolvimento
 
-O sistema é desenvolvido seguindo a metodologia Scrum. As tarefas específicas de cada sprint estão documentadas no arquivo [Scrum.md](/Docs/Scrum.md).
+O sistema é desenvolvido seguindo a metodologia Scrum. As tarefas específicas de cada sprint estão documentadas no arquivo [Scrum.md](https://github.com/DanielleBritoEvangelista/AgileDocs/blob/feat/rest-api-laravel/Docs/generalPlanning.md).
 
 <!-- Contribuições -->
 ## Contribuições

@@ -15,14 +15,14 @@ Desenvolver uma plataforma web e mobile para criação, edição e gerenciamento
 
 ### 1. Sprint 1: Planejamento Inicial
 
-- [x] 📅 Reunião de Planejamento do Projeto
-- [x] 📋 Levantamento de Requisitos
-- [x] 🏗️ Definição da Arquitetura do Sistema
-- [x] ⚙️ Configuração do Ambiente de Desenvolvimento
+- ✅ 📅 Reunião de Planejamento do Projeto
+- ✅ 📋 Levantamento de Requisitos
+- ✅ 🏗️ Definição da Arquitetura do Sistema
+- ✅ ⚙️ Configuração do Ambiente de Desenvolvimento
 
 ### 2. Sprint 2: Prototipação UX/UI
 
-- [x] 🕵️‍♂️ Pesquisa de Experiência do Usuário (UX)
+- ✅ 🕵️‍♂️ Pesquisa de Experiência do Usuário (UX)
 - [ ] 🖌️ Criação de Wireframes para a Versão Web
 - [ ] 📱 Criação de Wireframes para a Versão Mobile
 - [ ] 🔄 Prototipação Interativa (InVision, Figma)
@@ -30,16 +30,16 @@ Desenvolver uma plataforma web e mobile para criação, edição e gerenciamento
 
 ### 3. Sprint 3: Modelagem de Banco de Dados
 
-- [ ] 🗂️ Projeto do Banco de Dados
-- [ ] 📂 Criação das Migrações no Laravel
-- [ ] 🔄 Definição das Relações entre Tabelas
-- [ ] 🏦 Implementação do Banco de Dados
+- ✅ 🗂️ Projeto do Banco de Dados
+- ✅ 📂 Criação das Migrações no Laravel
+- ✅ 🔄 Definição das Relações entre Tabelas
+- ✅ 🏦 Implementação do Banco de Dados
 
 ### 4. Sprint 4: Desenvolvimento da Versão Web
 
-- [ ] 🏗️ **Configuração do Projeto Laravel:**
-  - [ ] 🆕 Criar um novo projeto Laravel.
-  - [ ] ⚙️ Configurar as dependências necessárias (Composer, NPM).
+- ✅ 🏗️ **Configuração do Projeto Laravel:**
+  - [x] 🆕 Criar um novo projeto Laravel.
+  - [x] ⚙️ Configurar as dependências necessárias (Composer, NPM).
 - [ ] ⚙️ **Configuração do Sistema de Autenticação:**
   - [ ] 🔐 Implementar o sistema de autenticação Laravel.
   - [ ] 🎨 Personalizar as páginas de login e registro.
