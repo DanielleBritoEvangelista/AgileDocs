@@ -18,5 +18,23 @@ class Document extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function revisionsHistory()
+    {
+        return $this->hasMany(RevisionsHistory::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function auditLogs()
+    {
+        return $this->hasMany(AuditLog::class);
+    }
     
+    public function documentAccessControls()
+    {
+        return $this->hasMany(DocumentAccessControl::class);
+    }
 }

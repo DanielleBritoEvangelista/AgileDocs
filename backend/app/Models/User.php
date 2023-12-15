@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
     ];
 
     /**
@@ -42,4 +43,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the user's teams.
+     */
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
+
+    /**
+     * Get the user's document access controls.
+     */
+    public function documentAccessControls()
+    {
+        return $this->hasMany(DocumentAccessControl::class);
+    }
 }

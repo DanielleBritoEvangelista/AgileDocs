@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Category;
+use App\Models\Team;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class TeamController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $teams = Team::all();
 
-        if($categories->count() > 0){
+        if($teams->count() > 0){
             return response()->json([
                 'status' => '200',
-                'categories' => $categories
+                'teams' => $teams
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'No categories found'
+                'message' => 'No teams found'
             ], 404);
         }
     }
@@ -35,24 +35,24 @@ class CategoryController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                'status' => '400',
+                'status' => '422',
                 'errors' => $validator->errors()
             ], 422);
         }else{
-            $category = Category::create([
+            $team = Team::create([
                 'name' => $request->name,
                 'description' => $request->description
             ]);
 
-            if($category){
+            if($team){
                 return response()->json([
                     'status' => '200',
-                    'message' => 'Category created successfully',
+                    'message' => 'Team created successfully',
                 ], 200);
             } else {
                 return response()->json([
                     'status' => '500',
-                    'message' => 'Category creation failed'
+                    'message' => 'Team creation failed'
                 ], 500);
             }
         }
@@ -60,34 +60,34 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = Category::find($id);
+        $team = Team::find($id);
 
-        if($category){
+        if($team){
             return response()->json([
                 'status' => '200',
-                'category' => $category
+                'team' => $team
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'Category not found'
+                'message' => 'Team not found'
             ], 404);
         }
     }
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $team = Team::find($id);
 
-        if($category){
+        if($team){
             return response()->json([
                 'status' => '200',
-                'category' => $category
+                'team' => $team
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'Category not found'
+                'message' => 'Team not found'
             ], 404);
         }
     }
@@ -101,47 +101,46 @@ class CategoryController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                'status' => '400',
-                'errors' => $validator->messages()
+                'status' => '422',
+                'errors' => $validator->errors()
             ], 422);
         }else{
+            $team = Team::find($id);
 
-            $category = Category::find($id);
-
-            if($category){
-                $category->update([
+            if($team){
+                $team->update([
                     'name' => $request->name,
                     'description' => $request->description
                 ]);
     
                     return response()->json([
                         'status' => '200',
-                        'message' => 'Category updated successfully',
+                        'message' => 'Team updated successfully',
                     ], 200);
             }else {
                 return response()->json([
                     'status' => '500',
-                    'message' => 'Category update failed'
+                    'message' => 'Team update failed'
                 ], 500);
             }
         }
     }
-
+    
     // public function destroy($id)
     // {
-    //     $category = Category::find($id);
+    //     $team = Team::find($id);
 
-    //     if($category){
-    //         $category->delete();
+    //     if($team){
+    //         $team->delete();
 
     //         return response()->json([
     //             'status' => '200',
-    //             'message' => 'Category deleted successfully',
+    //             'message' => 'Team deleted successfully',
     //         ], 200);
     //     } else {
     //         return response()->json([
     //             'status' => '404',
-    //             'message' => 'Category deletion failed'
+    //             'message' => 'Team deletion failed'
     //         ], 404);
     //     }
     // }

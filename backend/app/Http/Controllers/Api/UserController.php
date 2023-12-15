@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Category;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $users = User::all();
 
-        if($categories->count() > 0){
+        if($users->count() > 0){
             return response()->json([
                 'status' => '200',
-                'categories' => $categories
+                'users' => $users
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'No categories found'
+                'message' => 'No users found'
             ], 404);
         }
     }
@@ -30,29 +30,33 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:2555',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8|max:50|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+            'type' => 'required|in:admin,supervisor,common',
         ]);
 
         if($validator->fails()){
             return response()->json([
-                'status' => '400',
+                'status' => '422',
                 'errors' => $validator->errors()
             ], 422);
         }else{
-            $category = Category::create([
+            $user = User::create([
                 'name' => $request->name,
-                'description' => $request->description
+                'email' => $request->email,
+                'password'=> bcrypt($request->password),
+                'type' => $request->type,
             ]);
 
-            if($category){
+            if($user){
                 return response()->json([
                     'status' => '200',
-                    'message' => 'Category created successfully',
+                    'message' => 'User created successfully',
                 ], 200);
             } else {
                 return response()->json([
                     'status' => '500',
-                    'message' => 'Category creation failed'
+                    'message' => 'User creation failed'
                 ], 500);
             }
         }
@@ -60,34 +64,34 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = Category::find($id);
+        $user = User::find($id);
 
-        if($category){
+        if($user){
             return response()->json([
                 'status' => '200',
-                'category' => $category
+                'user' => $user
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'Category not found'
+                'message' => 'User not found'
             ], 404);
         }
     }
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $user = User::find($id);
 
-        if($category){
+        if($user){
             return response()->json([
                 'status' => '200',
-                'category' => $category
+                'user' => $user
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'Category not found'
+                'message' => 'User not found'
             ], 404);
         }
     }
@@ -96,52 +100,55 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:2555',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8|max:50|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+            'type' => 'required|in:admin,supervisor,common',
         ]);
 
         if($validator->fails()){
             return response()->json([
-                'status' => '400',
-                'errors' => $validator->messages()
+                'status' => '422',
+                'errors' => $validator->errors()
             ], 422);
         }else{
+            $user = User::find($id);
 
-            $category = Category::find($id);
-
-            if($category){
-                $category->update([
+            if($user){
+                $user->update([
                     'name' => $request->name,
-                    'description' => $request->description
+                    'email' => $request->email,
+                    'password'=> bcrypt($request->password),
+                    'type' => $request->type,
                 ]);
     
                     return response()->json([
                         'status' => '200',
-                        'message' => 'Category updated successfully',
+                        'message' => 'User updated successfully',
                     ], 200);
             }else {
                 return response()->json([
                     'status' => '500',
-                    'message' => 'Category update failed'
+                    'message' => 'User update failed'
                 ], 500);
             }
         }
     }
-
+    
     // public function destroy($id)
     // {
-    //     $category = Category::find($id);
+    //     $user = User::find($id);
 
-    //     if($category){
-    //         $category->delete();
+    //     if($user){
+    //         $user->delete();
 
     //         return response()->json([
     //             'status' => '200',
-    //             'message' => 'Category deleted successfully',
+    //             'message' => 'User deleted successfully',
     //         ], 200);
     //     } else {
     //         return response()->json([
     //             'status' => '404',
-    //             'message' => 'Category deletion failed'
+    //             'message' => 'User deletion failed'
     //         ], 404);
     //     }
     // }

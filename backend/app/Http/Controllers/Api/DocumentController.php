@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Category;
+use App\Models\Document;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class DocumentController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $documents = Document::all();
 
-        if($categories->count() > 0){
+        if($documents->count() > 0){
             return response()->json([
                 'status' => '200',
-                'categories' => $categories
+                'documents' => $documents
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'No categories found'
+                'message' => 'No documents found'
             ], 404);
         }
     }
@@ -29,8 +29,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:2555',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:2555',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if($validator->fails()){
@@ -39,20 +40,21 @@ class CategoryController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         }else{
-            $category = Category::create([
-                'name' => $request->name,
-                'description' => $request->description
+            $document = Document::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'category_id' => $request->category_id,
             ]);
 
-            if($category){
+            if($document){
                 return response()->json([
                     'status' => '200',
-                    'message' => 'Category created successfully',
+                    'message' => 'Document created successfully',
                 ], 200);
             } else {
                 return response()->json([
                     'status' => '500',
-                    'message' => 'Category creation failed'
+                    'message' => 'Document creation failed'
                 ], 500);
             }
         }
@@ -60,34 +62,34 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = Category::find($id);
+        $document = Document::find($id);
 
-        if($category){
+        if($document){
             return response()->json([
                 'status' => '200',
-                'category' => $category
+                'document' => $document
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'Category not found'
+                'message' => 'Document not found'
             ], 404);
         }
     }
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $document = Document::find($id);
 
-        if($category){
+        if($document){
             return response()->json([
                 'status' => '200',
-                'category' => $category
+                'document' => $document
             ], 200);
         } else {
             return response()->json([
                 'status' => '404',
-                'message' => 'Category not found'
+                'message' => 'Document not found'
             ], 404);
         }
     }
@@ -95,53 +97,55 @@ class CategoryController extends Controller
     public function update(Request $request,int $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:2555',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:2555',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if($validator->fails()){
             return response()->json([
-                'status' => '400',
-                'errors' => $validator->messages()
+                'status' => '422',
+                'errors' => $validator->errors()
             ], 422);
         }else{
 
-            $category = Category::find($id);
+            $document = Document::find($id);
 
-            if($category){
-                $category->update([
-                    'name' => $request->name,
-                    'description' => $request->description
+            if($document){
+                $document->update([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'category_id' => $request->category_id,
                 ]);
     
                     return response()->json([
                         'status' => '200',
-                        'message' => 'Category updated successfully',
+                        'message' => 'Document updated successfully',
                     ], 200);
             }else {
                 return response()->json([
                     'status' => '500',
-                    'message' => 'Category update failed'
+                    'message' => 'Document update failed'
                 ], 500);
             }
         }
     }
-
+    
     // public function destroy($id)
     // {
-    //     $category = Category::find($id);
+    //     $document = Document::find($id);
 
-    //     if($category){
-    //         $category->delete();
+    //     if($document){
+    //         $document->delete();
 
     //         return response()->json([
     //             'status' => '200',
-    //             'message' => 'Category deleted successfully',
+    //             'message' => 'Document deleted successfully',
     //         ], 200);
     //     } else {
     //         return response()->json([
     //             'status' => '404',
-    //             'message' => 'Category deletion failed'
+    //             'message' => 'Document deletion failed'
     //         ], 404);
     //     }
     // }
